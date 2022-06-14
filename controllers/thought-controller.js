@@ -1,6 +1,38 @@
 const { Thought, User } = require('../models');
 
 const thoughtController = {
+
+    getAllThought(req, res) {
+        Thought.find({})
+        
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
+        .sort({ _id: -1 })
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(400);
+        });
+    },
+
+    getThoughtById({ params }, res) {
+        Thought.findOne({ _id: params.id })
+
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.sendStatus(400);
+        });
+    },
+
   // add thought to User
     addThought({ params, body }, res) {
         console.log(params);
@@ -67,17 +99,32 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
-    // remove reply
-    removeReply({ params }, res) {
-        Thought.findOneAndUpdate(
-        { _id: params.thoughtId },
-        { $pull: { replies: { replyId: params.replyId } } },
-        { new: true }
-        )
+
+    // HOW DO I HANDLE THE REACTION?
+    // removeReaction({ params }, res) {
+    //     Thought.findOneAndUpdate(
+    //     { _id: params.thoughtId },
+    //     { $pull: { reactions: { ReactionId: params.ReactionId } } },
+    //     { new: true }
+    //     )
         
-        .then(dbUserData => res.json(dbUserData))
-        .catch(err => res.json(err));
-    }   
+    //     .then(dbUserData => res.json(dbUserData))
+    //     .catch(err => res.json(err));
+    // }   
 };
 
 module.exports = thoughtController;
+
+
+// TO DO ON PROJECT
+
+
+// SEE API ROUTES
+//WHAT ARE THE FRIENDS? FRIENDS CONNECT TO API USER-ROUTES?
+//HOW DO THE REACTION INTERACT WITH THE THOUGHT MODEL?
+
+
+// CONTROLLER NAMES FOR BOTH USER AND THOUGHT CORRECT? -------YES 13 JUN-----
+// NEED TO FINISH METHODS IN CONTROLLERS
+//NEED TO ADD THE METHODS IN THOUGHT-ROUTES
+//POST 13 VIDEO ON YOUTUBE

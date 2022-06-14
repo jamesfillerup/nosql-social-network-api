@@ -6,7 +6,7 @@ const userController = {
         User.find({})
         
         .populate({
-            path: 'comments',
+            path: 'thoughts',
             select: '-__v'
         })
         .select('-__v')
@@ -23,7 +23,7 @@ const userController = {
         User.findOne({ _id: params.id })
 
         .populate({
-            path: 'comments',
+            path: 'thoughts',
             select: '-__v'
         })
         .select('-__v')
