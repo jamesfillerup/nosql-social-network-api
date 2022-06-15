@@ -57,26 +57,26 @@ const thoughtController = {
         .catch(err => res.json(err));
     },
 
-    // add reply to thought
-    addReply({ params, body }, res) {
+    updateThought({ params, body}, res){
         Thought.findOneAndUpdate(
-        { _id: params.thoughtId },
-        { $push: { replies: body } },
-        { new: true, runValidators: true }
-        )
+            { _id: params.id },
+            body, 
+            { new: true, runValidators: true })
 
         .then(dbUserData => {
             if (!dbUserData) {
-            res.status(404).json({ message: 'No User found with this id!' });
+            res.status(404).json({ message: 'No thought found with this id!' });
             return;
             }
             res.json(dbUserData);
         })
+
         .catch(err => res.json(err));
     },
 
-    // remove thought
-    removeThought({ params }, res) {
+
+    // delete thought
+    deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.thoughtId })
 
         .then(deletedThought => {
@@ -99,32 +99,45 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
+    // deleteUser({ params }, res) {
+    //     User.findOneAndDelete({ _id: params.id })
 
-    // HOW DO I HANDLE THE REACTION?
-    // removeReaction({ params }, res) {
-    //     Thought.findOneAndUpdate(
-    //     { _id: params.thoughtId },
-    //     { $pull: { reactions: { ReactionId: params.ReactionId } } },
-    //     { new: true }
-    //     )
-        
     //     .then(dbUserData => res.json(dbUserData))
+
     //     .catch(err => res.json(err));
-    // }   
+    // },
+
+    addReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { replies: body } },
+            { new: true, runValidators: true }
+            )
+        
+            .then(dbUserData => {
+                if (!dbUserData) {
+                res.status(404).json({ message: 'No User found with this id!' });
+                return;
+                }
+                res.json(dbUserData);
+            })
+            .catch(err => res.json(err));
+        },        
+
+
+    deleteReaction({ params }, res) {
+        Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $pull: { reactions: { reactionId: params.reactionId } } },
+        { new: true }
+        )
+        
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => res.json(err));
+    }   
 };
 
 module.exports = thoughtController;
 
 
-// TO DO ON PROJECT
 
-
-// SEE API ROUTES
-//WHAT ARE THE FRIENDS? FRIENDS CONNECT TO API USER-ROUTES?
-//HOW DO THE REACTION INTERACT WITH THE THOUGHT MODEL?
-
-
-// CONTROLLER NAMES FOR BOTH USER AND THOUGHT CORRECT? -------YES 13 JUN-----
-// NEED TO FINISH METHODS IN CONTROLLERS
-//NEED TO ADD THE METHODS IN THOUGHT-ROUTES
-//POST 13 VIDEO ON YOUTUBE

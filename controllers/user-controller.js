@@ -44,7 +44,10 @@ const userController = {
 
 
     updateUser({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+        User.findOneAndUpdate(
+            { _id: params.id },
+            body, 
+            { new: true, runValidators: true })
 
         .then(dbUserData => {
             if (!dbUserData) {
@@ -60,6 +63,35 @@ const userController = {
 
     deleteUser({ params }, res) {
         User.findOneAndDelete({ _id: params.id })
+
+        .then(dbUserData => res.json(dbUserData))
+
+        .catch(err => res.json(err));
+    },
+
+    addFriend({ params }, res) {
+        User.findOneAndUpdate(
+            { _id: params.userId }, 
+            //https://www.mongodb.com/docs/manual/reference/operator/update/push/
+            { $push: {friends: params.friendId}},
+            { new: true, runValidators: true })
+
+        .then(dbUserData => {
+            if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+            }
+            res.json(dbUserData);
+        })
+
+        .catch(err => res.json(err));
+    },
+
+    deleteFriend({ params }, res) {
+        User.findOneAndDelete(
+            { _id: params.userId },
+            { $pull: {friends: params.friendId}},
+            )
 
         .then(dbUserData => res.json(dbUserData))
 
