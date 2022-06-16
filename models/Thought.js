@@ -24,10 +24,7 @@ const ThoughtSchema = new Schema(
             required: true
 
         },
-        reactions:{
-            type: [ReactionSchema]
-    // THIS NEEDS TO CONNECT TO THE REACTION.JS 
-        }
+        reactions: [ReactionSchema]
     }, 
     {
         toJSON: {

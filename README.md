@@ -2,7 +2,7 @@
 
 ## Description
 
-The purpose of this project to create an E-Commerce backend site that holds products and categories.
+The purpose of this project to create a social networking webpage using mongoose. It is a good alternative to use in place of using MySQL.
 
 
 
@@ -23,24 +23,18 @@ Please see video link for a walk through on how to clone it.
 [Clone to your computer](https://drive.google.com/file/d/15ogCY3Q-JLWhteoSiIoXLkhtK4Z0-mfz/view?usp=sharing "Click Me!")
 <br><br>
 
-[Installation and Seeding](https://drive.google.com/file/d/1VhxXe43-coYHKahcOUd2pmH6_YaxnigR/view?usp=sharing "Click Me!")
-<br><br>
-
-[How it works in Insomnia]( "Click Me!")
+[How it works in Insomnia](https://youtu.be/5gW3c7UwXL0 "Click Me!")
 <br><br>
 
 Once cloned you can put the following commands in:
 * `npm init`
 * `npm i ` (This should download all of the dependencies)
-* or run `npm i express node `
-* `npm run seed`
-* `npm start`
 
 
 
 ## Usage
 
-After you have cloned the repo to your computer and downloaded its dependencies you can run `node server` in the terminal. Then you will then be able to look at POST or GET routes on Insomnia. 
+After you have cloned the repo to your computer and downloaded its dependencies you can run `npm run devStart` in the terminal. Then you will then be able to look at POST or GET routes on Insomnia. 
 
 
 ## License
@@ -51,7 +45,7 @@ After you have cloned the repo to your computer and downloaded its dependencies 
 
 ## Tests
 
-To test this application run by running `node server` in bash and then opening it up in Insomnia.
+To test this application run by running `npm run devStart` in bash and then opening it up in Insomnia.
 
 ## Contact Me
 
