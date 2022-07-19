@@ -14,10 +14,6 @@ const UserSchema = new Schema(
             unique: true,
             //http://zparacha.com/validate-email-address-using-javascript-regular-expression
             match: [/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/]
-            // validate: { 
-            //     validator: function (vali) {
-            //         return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(vali);
-                //Must match a valid email address (look into Mongoose's matching validation)
         },
         thoughts: [{
             // Array of _id values referencing the Thought model

@@ -5,10 +5,6 @@ const thoughtController = {
     getAllThought(req, res) {
         Thought.find({})
         
-        // .populate({
-        //     path: 'thoughts',
-        //     select: '-__v'
-        // })
         .select('-__v')
         .sort({ _id: -1 })
         .then(dbUserData => res.json(dbUserData))
@@ -21,10 +17,7 @@ const thoughtController = {
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
 
-        // .populate({
-        //     path: 'thoughts',
-        //     select: '-__v'
-        // })
+
         .select('-__v')
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -98,13 +91,7 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
-    // deleteUser({ params }, res) {
-    //     User.findOneAndDelete({ _id: params.id })
 
-    //     .then(dbUserData => res.json(dbUserData))
-
-    //     .catch(err => res.json(err));
-    // },
 
     addReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
